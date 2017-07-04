@@ -18,7 +18,7 @@ JOYSTICK_DATA joyData;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  bt.begin(38400);
+  bt.begin(9600);
 }
 
 void loop() {
