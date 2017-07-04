@@ -10,7 +10,7 @@ https://github.com/oroca/oroca_rov/blob/master/Software/Arduino/RovMain_Leo/RSP.
 가져다 사용
 
 TX Test Code
-
+<pre><code>
 #include "AsulBT.h"
 
 AsulBT bt;
@@ -32,3 +32,4 @@ void loop() {
     bt.writeJoystick(joyData);
     delay(10);
 }
+</code></pre>
