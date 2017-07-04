@@ -15,14 +15,12 @@ TX Test Code
 
 AsulBT bt;
 JOYSTICK_DATA joyData;
-void setup() {
-  // put your setup code here, to run once:
+void setup() {  
   Serial.begin(9600);
   bt.begin(9600);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
    //read the joystick data
     int posX = analogRead(0);
     int posY = analogRead(1);
