@@ -25,10 +25,7 @@ AsulBT::AsulBT(uint8_t index)
 
 void AsulBT::begin(uint32_t baud)
 {
-  btSerial.begin(baud);
-  String str;
-  
-  Serial.println(sizeof(int));
+  btSerial.begin(baud); 
 }
 
 int AsulBT::update(void)
@@ -169,33 +166,36 @@ void AsulBT::SendCmd( RSP_CMD_OBJ *pCmd )
 {
   uint8_t i;
   uint8_t CheckSum = 0;
-
+#ifdef _USE_DEBUG
   Serial.print("STX: ");
   Serial.println(RSP_CMD_STX, HEX);
   Serial.print("CMD: ");
   Serial.println(pCmd->Cmd, HEX);
   Serial.print("LEN: ");
   Serial.println(pCmd->Length, DEC);
-  
+#endif
   btSerial.write( RSP_CMD_STX );  
   btSerial.write( pCmd->Cmd );      CheckSum ^= pCmd->Cmd;  
   btSerial.write( pCmd->Length );   CheckSum ^= pCmd->Length;
 
-  Serial.println("DATA:");
+  //Serial.println("DATA:");
   for( i=0; i<pCmd->Length; i++ )
   {
     btSerial.write( pCmd->Data[i] );
     CheckSum ^= pCmd->Data[i];    
+#ifdef _USE_DEBUG    
     Serial.println(pCmd->Data[i], DEC);
+#endif    
   }
 
   btSerial.write( CheckSum );
   btSerial.write( RSP_CMD_ETX );
+#ifdef _USE_DEBUG  
   Serial.print("CHK: ");
   Serial.println(CheckSum, HEX);
   Serial.print("ETX: ");
   Serial.println(RSP_CMD_ETX, HEX);
-  
+#endif    
   
 }
 
@@ -258,5 +258,4 @@ String AsulBT::getVersion()
 {
   return Version;
 }
-
 
